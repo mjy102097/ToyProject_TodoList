@@ -9,7 +9,7 @@ function TodolistComplete() {
         <h1 class="title">Todo Complete List</h1>
         <div class="input-box">
             <input type="text" class="todo-input" />
-            <button class="button todo-submit">확인</button>
+            <button class="button todo-submit">조회</button>
         </div>
         <div class="todo-container">
             <ul class="todo-list-container">
