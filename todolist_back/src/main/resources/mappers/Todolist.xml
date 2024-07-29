@@ -3,10 +3,10 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.toyproject.todolist.repository.TodoListMapper">
-    <insert id="save">
-        insert into todolist_tb(todolistId , userId, todolistTxt , todolistDate)
+<mapper namespace="com.toyproject.todolist.repository.TodoListMapper" >
+    <insert id="save" parameterType="com.toyproject.todolist.entity.Todolist">
+        insert into todolist_tb
         values
-        (0, #{userId} , #{todolistTxt} , #{NowDate()]
+        (0,  #{todolistTxt} , #{todolistDate} )
     </insert>
 </mapper>

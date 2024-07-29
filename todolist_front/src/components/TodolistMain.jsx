@@ -20,9 +20,9 @@ function TodolistMain() {
 
   const handleRegisterSubmitClick = async () => {
     try {
-      const response = await axios.post("http://localhost:8080/todoList", todoList);
-      console.log(response.date);
+      const response = await axios.post("http://localhost:8080/todolist", todoList);
       if(response.status === 200) {
+        console.log(response.data);
         alert("등록성공!");
       }
     } catch (error) {
