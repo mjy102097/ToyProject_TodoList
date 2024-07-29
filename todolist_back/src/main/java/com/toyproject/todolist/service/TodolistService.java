@@ -1,5 +1,7 @@
 package com.toyproject.todolist.service;
 
-public interface TodolistService {
+import com.toyproject.todolist.dto.ReqTodolistDto;
 
+public interface TodolistService {
+    int registerTodoList(ReqTodolistDto dto);
 }
