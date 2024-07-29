@@ -22,6 +22,7 @@ spring:
   output:
     ansi:
       enabled: ALWAYS
+
 mybatis:
   mapper-locations:
     - /mappers/*.xml

@@ -1,6 +1,6 @@
 package com.toyproject.todolist.dto;
 
-public class TodolistDto {
+public class ReqTodolistDto {
     private String todolistTxt;
     private String todolistDate;
 }
