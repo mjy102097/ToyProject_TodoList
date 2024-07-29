@@ -5,8 +5,8 @@ import axios from 'axios';
 
 function TodolistMain() {
   const [ todoList, setTodoList ] = useState({
-    content: "",
-    date: ""
+    todolistTxt: "",
+    todolistDate: ""
   });
 
   const handleRegisterInputChange = (e) => {
