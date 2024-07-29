@@ -20,9 +20,9 @@ function TodolistMain() {
 
   const handleRegisterSubmitClick = async () => {
     try {
-      const response = await axios.post("http://localhost:8080/todoList", todoList);
-      console.log(response.date);
+      const response = await axios.post("http://localhost:8080/todolist", todoList);
       if(response.status === 200) {
+        console.log(response.data);
         alert("등록성공!");
       }
     } catch (error) {
@@ -32,8 +32,8 @@ function TodolistMain() {
 
     setTodoList(todoList => {
       return{
-        content: "",
-        date: ""
+        todolistTxt: "",
+        todolistDate: ""
       }
     });
   }
@@ -44,14 +44,14 @@ function TodolistMain() {
         <h1 className="title">Todo Main List</h1>
         <div className="input-box">
         <input type="text" className="todo-input" 
-          name='content'
+          name='todolistTxt'
           onChange={handleRegisterInputChange}
-          value={todoList.content}
+          value={todoList.todolistTxt}
         />
         <input type="date" className="todo-input"
-          name='date'
+          name='todolistDate'
           onChange={handleRegisterInputChange}
-          value={todoList.date}
+          value={todoList.todolistDate}
         />
         <button className="button todo-submit" onClick={handleRegisterSubmitClick}>추가</button>
         <button className="button edit-button">수정</button>
