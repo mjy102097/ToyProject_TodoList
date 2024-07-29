@@ -17,6 +17,6 @@ public class UserController {
     @PostMapping
     public ResponseEntity<?> registerUser(@RequestBody ReqUserDto reqUserDto) {
         log.info("{}", reqUserDto);
-        return ResponseEntity.ok().body(userService.registerUserList(reqUserDto));
+        return ResponseEntity.ok().body(userService.registerUser(reqUserDto));
     }
 }
