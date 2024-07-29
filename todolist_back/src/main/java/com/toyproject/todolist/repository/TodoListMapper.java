@@ -1,5 +1,6 @@
 package com.toyproject.todolist.repository;
 
+import com.toyproject.todolist.entity.Todolist;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
