@@ -1,7 +1,6 @@
 package com.toyproject.todolist.dto;
 
-public class UserDto {
+public class ReqUserDto {
     private String userName;
-    private String userEmail;
     private String userPassword;
 }
