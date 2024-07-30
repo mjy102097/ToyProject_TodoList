@@ -1,7 +1,16 @@
 import { css } from "@emotion/react";
 
 export const containerStyle = css`
-  border-bottom: 1px solid black;
+  .main {
+    text-align: center;
+  }
+  &:hover {
+    content: "";
+    display: block;
+    width: 80%;
+    border-bottom: 3px solid black;
+    margin: auto;
+  }
   
   .menu-container {
     height: 80px;
