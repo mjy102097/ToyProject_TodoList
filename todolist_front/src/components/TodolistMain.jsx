@@ -5,8 +5,8 @@ import axios from 'axios';
 
 function TodolistMain() {
   const [ todoList, setTodoList ] = useState({
-    todolistTxt: "",
-    todolistDate: ""
+    todoTxt: "",
+    todoDate: ""
   });
 
   const handleRegisterInputChange = (e) => {
@@ -32,8 +32,8 @@ function TodolistMain() {
 
     setTodoList(todoList => {
       return{
-        todolistTxt: "",
-        todolistDate: ""
+        todoTxt: "",
+        todoDate: ""
       }
     });
   }
@@ -44,14 +44,14 @@ function TodolistMain() {
         <h1 className="title">Todo Main List</h1>
         <div className="input-box">
         <input type="text" className="todo-input" 
-          name='todolistTxt'
+          name='todoTxt'
           onChange={handleRegisterInputChange}
-          value={todoList.todolistTxt}
+          value={todoList.todoTxt}
         />
         <input type="date" className="todo-input"
-          name='todolistDate'
+          name='todoDate'
           onChange={handleRegisterInputChange}
-          value={todoList.todolistDate}
+          value={todoList.todoDate}
         />
         <button className="button todo-submit" onClick={handleRegisterSubmitClick}>추가</button>
         <button className="button edit-button">수정</button>
