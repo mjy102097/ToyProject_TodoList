@@ -13,12 +13,12 @@ function TodolistIncomplete() {
     todoTxt : "",
     todoDate : "" 
   });
-  const [ registerTodo, setRegisterTodo ] = useState({
+  // const [ registerTodo, setRegisterTodo ] = useState({
 
-  });
-  const [ selectTodo, setSelectTodo ] = useState({
+  // });
+  // const [ selectTodo, setSelectTodo ] = useState({
 
-  });
+  // });
   const [ params, setParams ] = useState({
     todoTxt : "",
     todoDate : ""
