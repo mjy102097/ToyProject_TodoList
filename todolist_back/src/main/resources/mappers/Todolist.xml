@@ -4,7 +4,7 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.toyproject.todolist.repository.TodoListMapper" >
-    <insert id="save" parameterType="com.toyproject.todolist.entity.Todolist">
+    <insert id="save" parameterType="com.toyproject.todolist.entity.Todo">
         insert into todolist_tb
         values
         (0,  #{todolistTxt} , #{todolistDate} )
