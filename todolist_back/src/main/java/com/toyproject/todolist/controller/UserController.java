@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 @Slf4j
 @RestController
+@RequestMapping("/api/v1")
 public class UserController {
 
     @Autowired
@@ -26,7 +27,7 @@ public class UserController {
 
 //    @PostMapping
 //    로그인 만들어야함
-    @PostMapping
+    @PostMapping("/userlogin")
     public ResponseEntity<?> login(@RequestBody ReqUserDto reqUserDto, HttpServletRequest request) {
         RespUserDto respDto = userService.loginUser(reqUserDto);
         HttpSession session = request.getSession();

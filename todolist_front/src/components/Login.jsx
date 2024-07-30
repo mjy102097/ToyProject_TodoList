@@ -4,12 +4,11 @@ import React, { useRef, useState } from 'react';
 import { MainCon } from '../styles/TodolistMain';
 
 function Login(props) {
-    const [ userList, setUserList ] = useState({
-        userId : "",
+    const [ user, setUser ] = useState({
         username : "",
         password : ""
     });
-    const [ inputData, setInputData ] = useState({...userList});
+    const [ inputData, setInputData ] = useState({...user});
 
     const inputRef = {
         username : useRef(),
@@ -24,15 +23,15 @@ function Login(props) {
                     break;
                 case "password" :
                     username.current.focus();
-                    setUserList(userList => [ ...userList, inputData ]);
-                    setInputData({ ...userList });
+                    setUser(user => [ ...user, inputData ]);
+                    setInputData({ ...user });
                     break;
                 default:
             }
         }
     }
     const handleInputChange = (e) => {
-        setInputData(inputData => {
+        setUser(inputData => {
             return {
                 ...inputData,
                 [e.target.name] : e.target.value
@@ -41,30 +40,39 @@ function Login(props) {
     }
     const handleUserLoginClick = async () => {
         try{
-            const response = await axios.post(`http://localhost:8080/api/v1/userlogin/${userList}`)
-            setUserList(response.data);
+            const response = await axios.post('http://localhost:8080/api/v1/userlogin', user);
+            setUser(response.data);
+            console.log(response.data);
         }catch(e) {
             console.error(e);
         }
+        setUser({
+            username : "",
+            password : ""
+        })
+        
     }
+
     return (
         <div css={MainCon}>
             <div className="todo-mainContainer">
             <input name="username" placeholder="아이디" 
             onKeyDown={handleInputKeyDown}
             onChange={handleInputChange}
-            value={inputData.username}
+            value={user.username}
             ref={inputRef.username}/>
+
+
 
             <input name="password" placeholder="비밀번호" 
             onKeyDown={handleInputKeyDown}
             onChange={handleInputChange}
-            value={inputData.password}
+            value={user.password}
             ref={inputRef.password}/>
-            <tr>
+            <div>
                 <button onClick={handleUserLoginClick}>로그인</button>
                 <button onClick={handleUserLoginClick}>회원가입</button>
-            </tr>
+            </div>
     </div>
     </div>
     );

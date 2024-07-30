@@ -26,14 +26,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public RespUserDto loginUser(ReqUserDto dto) {
+
         User user = User.builder()
                 .username(dto.getUsername())
                 .password(dto.getPassword())
                 .build();
+        System.out.println(user);
         User newUser = userMapper.login(user);
-
+        //System.out.println(newUser);
         return RespUserDto.builder()
-                .userId(newUser.getUserId())
                 .username(newUser.getUsername())
                 .password(newUser.getPassword())
                 .build();
