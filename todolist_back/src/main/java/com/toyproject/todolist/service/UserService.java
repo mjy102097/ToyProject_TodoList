@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface UserService {
     int registerUser(ReqUserDto dto);
-    List<RespUserDto> getUserList(ReqUserDto dto);
+    RespUserDto loginUser(ReqUserDto dto);
 }

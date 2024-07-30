@@ -1,14 +1,12 @@
 package com.toyproject.todolist.service;
 
 import com.toyproject.todolist.dto.ReqUserDto;
-import com.toyproject.todolist.dto.RespTodoDto;
 import com.toyproject.todolist.dto.RespUserDto;
 import com.toyproject.todolist.entity.User;
 import com.toyproject.todolist.repository.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -26,8 +24,18 @@ public class UserServiceImpl implements UserService {
         return userMapper.save(user);
     }
 
-    public List<RespUserDto> getUserList(ReqUserDto dto) {
+    @Override
+    public RespUserDto loginUser(ReqUserDto dto) {
+        User user = User.builder()
+                .username(dto.getUsername())
+                .password(dto.getPassword())
+                .build();
+        User newUser = userMapper.login(user);
 
-        return null;
+        return RespUserDto.builder()
+                .userId(newUser.getUserId())
+                .username(newUser.getUsername())
+                .password(newUser.getPassword())
+                .build();
     }
 }
