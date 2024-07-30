@@ -1,9 +1,9 @@
 package com.toyproject.todolist.repository;
 
-import com.toyproject.todolist.entity.Todolist;
+import com.toyproject.todolist.entity.Todo;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface TodoListMapper {
-    int save(Todolist todoList);
+    int save(Todo todo);
 }

@@ -5,8 +5,8 @@ import lombok.Data;
 
 @Builder
 @Data
-public class Todolist {
+public class Todo {
     private int todolistId;
-    private String todolistTxt;
-    private String todolistDate;
+    private String todoTxt;
+    private String todoDate;
 }
