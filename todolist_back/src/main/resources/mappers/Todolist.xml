@@ -7,6 +7,17 @@
     <insert id="save" parameterType="com.toyproject.todolist.entity.Todo">
         insert into todolist_tb
         values
-        (0,  #{todolistTxt} , #{todolistDate} )
+        (0,  #{todoTxt} , #{todoDate} )
     </insert>
+    <select id="findTodoList"
+        parameterType="com.toyproject.todolist.entity.Todo"
+        resultType="com.toyproject.todolist.entity.Todo">
+
+        select
+            todolistId,
+            todoTxt,
+            todoDate
+        form
+            todolist_tb
+    </select>
 </mapper>
