@@ -5,7 +5,7 @@ import com.toyproject.todolist.dto.RespUserDto;
 
 import java.util.List;
 
-public interface UserService {
+public interface  UserService {
     int registerUser(ReqUserDto dto);
     RespUserDto loginUser(ReqUserDto dto);
 }
