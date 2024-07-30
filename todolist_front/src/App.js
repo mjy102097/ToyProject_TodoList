@@ -8,6 +8,7 @@ import TodolistComplete from './components/TodolistComplete';
 import TodolistIncomplete from './components/TodolistIncomplete';
 import HighMenu from './components/HighMenu';
 import Login from './components/Login';
+import LoginNewUser from './components/LoginNewUser';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path='TodoMain' element={<TodolistMain/>} />
           <Route path='TodoComplete' element={<TodolistComplete/>} />
           <Route path='TodoIncomplete' element={<TodolistIncomplete/>} />
+          <Route path='LoginNewUser' element={<LoginNewUser/>}/>
         </Routes>
     </>
   );
