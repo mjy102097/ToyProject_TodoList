@@ -9,6 +9,38 @@
         values
         (0,  #{todoTxt} , #{todoDate} )
     </insert>
+    <update id="Modify" parameterType="integer">
+        update
+            todolist_tb
+        set
+            todoTxt = #{todoTxt} , todoDate = #{todoDate}
+        where
+            todolistId = #{todolistId}
+    </update>
+    <update id="Complete" parameterType="integer">
+        update
+            todolist_tb
+        set
+            todocomplete = 1
+        where
+            todolistId = #{todolistId}
+    </update>
+    <update id="NotComplete" parameterType="integer">
+        update
+            todolist_tb
+        set
+            todocomplete = 0
+        where
+            todolistId = #{todolistId}
+    </update>
+
+    <delete id="delete" parameterType="integer">
+        delete
+        from
+            todolist_tb
+        where
+            todolistId =#{id}
+    </delete>
     <select id="findTodoList"
         parameterType="com.toyproject.todolist.entity.Todo"
         resultType="com.toyproject.todolist.entity.Todo">
@@ -20,4 +52,5 @@
         form
             todolist_tb
     </select>
+
 </mapper>
