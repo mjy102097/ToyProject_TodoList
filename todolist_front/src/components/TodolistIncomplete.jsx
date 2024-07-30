@@ -10,9 +10,8 @@ function TodolistIncomplete() {
   const [ todoList, setTodoList ] = useState([])
   const [ updateTodo, setUpdateTodo ] = useState({
     todolistId : "",
-    userId : "",
-    todolistTxt : "",
-    todolistDate : "" 
+    todoTxt : "",
+    todoDate : "" 
   });
   const [ registerTodo, setRegisterTodo ] = useState({
 
@@ -21,8 +20,8 @@ function TodolistIncomplete() {
 
   });
   const [ params, setParams ] = useState({
-    todolistTxt : "",
-    todolistDate : ""
+    todoTxt : "",
+    todoDate : ""
 })
 const requestGetTodo = async (todolistId) => { 
   let responseData = null;
@@ -63,11 +62,9 @@ const requestDeleteTodo = async (todolistId) => {
 const closeModalTodo = () => {
   setIsModalTodo(false);
   setUpdateTodo({
-        computerId : "",
-        company : "",
-        cpu : "",
-        ram : "",
-        ssd : "",
+      todolistId : "",
+      todoTxt : "",
+      todoDate : "" 
     });
 }
 const handleUpdateTodoClick = async (todolistId) => {
@@ -123,7 +120,7 @@ const handleUpdateInputChange = (e) => {
         height: 100%;
       `}>
           <h2>할 일 수정</h2>
-            <input type='text' name='todolistTxt' onChange={handleUpdateInputChange} value={updateTodo.todolistTxt} disabled={true}/>
+            <input type='text' name='todoTxt' onChange={handleUpdateInputChange} value={updateTodo.todoTxt} disabled={true}/>
           <div>
             <button onClick={handleUpdateSubmitClick}>확인</button>
             <button onClick={() => closeModalTodo()}>취소</button>
