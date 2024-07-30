@@ -15,14 +15,15 @@ public class TodoListController {
     @Autowired
     private TodolistServicempl todolistServicempl;
 
-    @PostMapping("/todolist")
+    @PostMapping("/todo")
     public ResponseEntity<?> createTodo(@RequestBody ReqTodoDto reqTodolistDto){
         log.info("Todo 성공 : {}" , reqTodolistDto);
         return ResponseEntity.ok().body(todolistServicempl.registerTodoList(reqTodolistDto));
     }
 
-    @GetMapping("/api/v1/todolist")
+    @GetMapping("/todolist")
     public ResponseEntity<?> todoListApi(ReqTodoDto reqDto){
         return ResponseEntity.ok().body(todolistServicempl.getTodoListAll(reqDto));
     }
+    
 }
