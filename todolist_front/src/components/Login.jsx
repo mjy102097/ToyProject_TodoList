@@ -1,16 +1,20 @@
-import axios from 'axios';
 import React, { useRef, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import { MainCon } from '../styles/TodolistMain';
 import api from '../apis/instance';
+import { useNavigate } from 'react-router-dom';
 
 function Login(props) {
+        
     const [ user, setUser ] = useState({
         username : "",
         password : ""
     });
     const [ inputData, setInputData ] = useState({...user});
 
+    const navigate = useNavigate();
+    const todogate = useNavigate();
+    
     const inputRef = {
         username : useRef(),
         password : useRef()
@@ -30,7 +34,8 @@ function Login(props) {
                 default:
             }
         }
-    }
+    } 
+    // text
     const handleInputChange = (e) => {
         setUser(inputData => {
             return {
@@ -44,15 +49,20 @@ function Login(props) {
             const response = await api.post('/userlogin', user);
             setUser(response.data);
             console.log(response.data);
+            alert(user.username + "님 환영합니다!");
+            todogate("/TodoMain");
         }catch(e) {
             console.error(e);
+            alert("아이디 비밀번호를 확인하세요");
         }
         setUser({
             username : "",
             password : ""
         })
-        
     }
+    const handleNewUsersClick = () => {
+        navigate("/LoginNewUser");
+    };
 
     return (
         <div css={MainCon}>
@@ -72,7 +82,7 @@ function Login(props) {
             ref={inputRef.password}/>
             <div>
                 <button onClick={handleUserLoginClick}>로그인</button>
-                <button onClick={handleUserLoginClick}>회원가입</button>
+                <button onClick={handleNewUsersClick}>회원가입</button>
             </div>
     </div>
     </div>

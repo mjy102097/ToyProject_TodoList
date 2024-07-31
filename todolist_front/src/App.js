@@ -1,7 +1,7 @@
 import './App.css';
 import { Global } from '@emotion/react';
 import {reset} from './styles/Global'
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import Navigaitor from './components/Navigaitor';
 import TodolistMain from './components/TodolistMain';
 import TodolistComplete from './components/TodolistComplete';
@@ -17,11 +17,12 @@ function App() {
         <Navigaitor/>
         <HighMenu/>
         <Routes>
+          <Route path="/" element={<Navigate to="/login" />} />
           <Route path='Login' element={<Login/>} />
+          <Route path='Loginnewuser' element={<LoginNewUser/>}/>
           <Route path='TodoMain' element={<TodolistMain/>} />
           <Route path='TodoComplete' element={<TodolistComplete/>} />
           <Route path='TodoIncomplete' element={<TodolistIncomplete/>} />
-          <Route path='Loginnewuser' element={<LoginNewUser/>}/>
         </Routes>
     </>
   );
