@@ -21,7 +21,7 @@ function App() {
           <Route path='TodoMain' element={<TodolistMain/>} />
           <Route path='TodoComplete' element={<TodolistComplete/>} />
           <Route path='TodoIncomplete' element={<TodolistIncomplete/>} />
-          <Route path='LoginNewUser' element={<LoginNewUser/>}/>
+          <Route path='Loginnewuser' element={<LoginNewUser/>}/>
         </Routes>
     </>
   );
