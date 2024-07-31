@@ -67,7 +67,6 @@ function LoginNewUser(props) {
           </div>
             <button onClick={handleNewUserClick}>가입하기</button>
           <div>
-
           </div>
         </form>
       </div>

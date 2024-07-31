@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { MainCon } from '../styles/TodolistMain';
 import ReactModal from 'react-modal';
 import { css } from '@emotion/react';
-import axios from 'axios';
 import api from '../apis/instance';
 
 function TodolistIncomplete() {
