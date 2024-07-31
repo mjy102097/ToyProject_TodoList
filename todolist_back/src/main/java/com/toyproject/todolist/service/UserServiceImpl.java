@@ -14,6 +14,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
+    // 회원가입
     @Override
     public int registerUser(ReqUserDto dto) {
         User user = User.builder()
@@ -24,6 +25,18 @@ public class UserServiceImpl implements UserService {
         return userMapper.save(user);
     }
 
+    // 아이디 중복 체크
+    @Override
+    public int checkUser(ReqUserDto reqUserDto) {
+        User user = User.builder()
+                .username(reqUserDto.getUsername())
+                .password(reqUserDto.getPassword())
+                .build();
+        int count = userMapper.check(user);
+        return count;
+    }
+
+    // 로그인 확인
     @Override
     public RespUserDto loginUser(ReqUserDto dto) {
 
@@ -31,9 +44,9 @@ public class UserServiceImpl implements UserService {
                 .username(dto.getUsername())
                 .password(dto.getPassword())
                 .build();
-        System.out.println(user);
+
         User newUser = userMapper.login(user);
-        //System.out.println(newUser);
+
         return RespUserDto.builder()
                 .username(newUser.getUsername())
                 .password(newUser.getPassword())

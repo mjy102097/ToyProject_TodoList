@@ -6,7 +6,7 @@
 
     <insert id="save" parameterType="com.toyproject.todolist.entity.User">
         insert into user_tb
-        values(0, #{userName}, #{userPassword})
+        values(0, #{username}, #{password})
     </insert>
 
     <select id="login" resultType="com.toyproject.todolist.entity.User">
@@ -17,5 +17,15 @@
         where
             username = #{username} and password = #{password}
     </select>
+    <select id="check" resultType="java.lang.Integer">
+        select
+            *
+        from
+            user_tb
+        where
+            username = #{username}
+
+    </select>
+
 
 </mapper>
