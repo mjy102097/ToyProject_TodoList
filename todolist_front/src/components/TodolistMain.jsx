@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import { MainCon } from '../styles/TodolistMain';
 import axios from 'axios';
+import api from '../apis/instance';
 
 function TodolistMain() {
   const [ todoList, setTodoList ] = useState({
@@ -20,7 +21,7 @@ function TodolistMain() {
 
   const handleRegisterSubmitClick = async () => {
     try {
-      const response = await axios.post("http://localhost:8080/todolist", todoList);
+      const response = await api.post("/todolist", todoList);
       if(response.status === 200) {
         console.log(response.data);
         alert("등록성공!");

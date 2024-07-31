@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useRef, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import { MainCon } from '../styles/TodolistMain';
+import api from '../apis/instance';
 
 function Login(props) {
     const [ user, setUser ] = useState({
@@ -40,7 +41,7 @@ function Login(props) {
     }
     const handleUserLoginClick = async () => {
         try{
-            const response = await axios.post('http://localhost:8080/api/v1/userlogin', user);
+            const response = await api.post('/userlogin', user);
             setUser(response.data);
             console.log(response.data);
         }catch(e) {
