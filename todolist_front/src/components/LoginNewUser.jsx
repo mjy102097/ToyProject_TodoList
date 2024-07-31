@@ -4,16 +4,17 @@ import * as s from "../styles/LoginNewUser";
 import { useNavigate } from 'react-router-dom';
 
 function LoginNewUser(props) {
+
     const [ newUser, setNewUser ] = useState({
         userId: '',
         username: '',
         password: ''
       });
     
+      // 폼 
       const [ form , setForm] = useState({
         username: '',
-        password: '',
-        email: '',
+        password: ''
       });
 
       const pageMove = useNavigate(); // 페이지 이동 훅
@@ -37,19 +38,15 @@ function LoginNewUser(props) {
           alert("이름 입력해주세요")
         }else if(form.password === ""){
           alert("비밀번호를 입력해주세요")
-        }else if(form.email === ""){
-          alert("이메일을 입력해주세요")
-        }else if(!form.email.includes("@")){
-          alert("유효한 이메일 주소를 입력해주세요.")
         }else{
           alert("회원가입 성공!")
           setNewUser(form);
           console.log(form); // 확인용
           setForm({
             username: '',
-            password: '',
-            email: '',
+            password: ''
           });
+
           pageMove('/Login');
         }
         
@@ -67,10 +64,6 @@ function LoginNewUser(props) {
           <div>
             <label>Password:</label>
             <input type="password" name="password" value={form.password} onChange={handleChange} />
-          </div>
-          <div>
-            <label>Email:</label>
-            <input type="email" name="email" value={form.email} onChange={handleChange} />
           </div>
             <button onClick={handleNewUserClick}>가입하기</button>
           <div>
