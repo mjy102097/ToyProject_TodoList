@@ -9,6 +9,6 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
     int save(User user);
-    int check(User user);
+    Integer check(User user);
     User login(User user);
 }

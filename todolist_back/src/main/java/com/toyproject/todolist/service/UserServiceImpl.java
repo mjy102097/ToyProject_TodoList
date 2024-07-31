@@ -22,6 +22,7 @@ public class UserServiceImpl implements UserService {
                 .password(dto.getPassword())
                 .build();
 
+
         return userMapper.save(user);
     }
 
@@ -32,8 +33,9 @@ public class UserServiceImpl implements UserService {
                 .username(reqUserDto.getUsername())
                 .password(reqUserDto.getPassword())
                 .build();
-        int count = userMapper.check(user);
-        return count;
+
+        Integer count = userMapper.check(user);
+        return (count == null) ? 0 : count;
     }
 
     // 로그인 확인

@@ -30,12 +30,11 @@ public class UserController {
     // 회원가입
     @PostMapping("/newuser")
     public ResponseEntity<?> registerUser(@RequestBody ReqUserDto reqUserDto) {
-        System.out.println(reqUserDto);
+        log.info("{}", reqUserDto);
         return ResponseEntity.ok().body(userService.registerUser(reqUserDto));
     }
 
-//    @PostMapping
-//    로그인 만들어야함
+    // 로그인
     @PostMapping("/userlogin")
     public ResponseEntity<?> login(@RequestBody ReqUserDto reqUserDto, HttpServletRequest request) {
         RespUserDto respDto = userService.loginUser(reqUserDto);

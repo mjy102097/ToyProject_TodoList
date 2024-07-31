@@ -19,7 +19,7 @@
     </select>
     <select id="check" resultType="java.lang.Integer">
         select
-            *
+            userId
         from
             user_tb
         where
