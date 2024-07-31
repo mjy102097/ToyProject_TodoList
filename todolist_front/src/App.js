@@ -17,8 +17,8 @@ function App() {
         <Navigaitor/>
         <HighMenu/>
         <Routes>
-          <Route path="/" element={<Navigate to="/login" />} />
-          <Route path='Login' element={<Login/>} />
+          <Route path="/" element={<Navigate to="/HOME" />} />
+          <Route path='home' element={<Login/>} />
           <Route path='Loginnewuser' element={<LoginNewUser/>}/>
           <Route path='TodoMain' element={<TodolistMain/>} />
           <Route path='TodoComplete' element={<TodolistComplete/>} />
