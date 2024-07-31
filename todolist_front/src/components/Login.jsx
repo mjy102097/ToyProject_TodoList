@@ -34,7 +34,8 @@ function Login(props) {
                 default:
             }
         }
-    }
+    } 
+    // text
     const handleInputChange = (e) => {
         setUser(inputData => {
             return {
