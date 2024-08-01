@@ -9,6 +9,20 @@
         values(0, #{username}, #{password})
     </insert>
 
+    <update id="change">
+        update
+            user_tb
+        set
+            password = #{password}
+        where
+            username = #{username}
+    </update>
+
+    <delete id="delete">
+        delete from user_tb
+        where username = #{username}
+    </delete>
+
     <select id="login" resultType="com.toyproject.todolist.entity.User">
         select
             *
@@ -17,6 +31,7 @@
         where
             username = #{username} and password = #{password}
     </select>
+
     <select id="check" resultType="java.lang.Integer">
         select
             userId

@@ -20,7 +20,7 @@ function App() {
         <Navigaitor/>
         <HighMenu/>
         <Routes>
-          <Route path="/" element={<Navigate to="<Login/>" />} />
+          <Route path="/" element={<Navigate to='/home' />} />
           <Route path='home' element={<Login/>} />
           <Route path='Loginnewuser' element={<LoginNewUser/>}/>
           <Route path='todolist' element={<TodolistMain/>} setLoginStatus={setLoginStatus} />

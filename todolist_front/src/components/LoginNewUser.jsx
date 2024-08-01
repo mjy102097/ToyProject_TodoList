@@ -47,9 +47,19 @@ function LoginNewUser(props) {
             password: ''
           });
 
-          pageMove('/Login');
-        }
-        
+  const handleJoinClick = async () => {
+    if(availableId == 1) {
+      console.log(availableId);
+      if (user.username === "") {
+        alert("아이디를 입력해주세요.")
+      } else if(user.password === "") {
+        alert("비밀번호를 입력해주세요.")
+      } else {
+        const registerUser = await api.post('/newuser', user);
+        console.log(registerUser);
+        alert("회원가입 성공!");
+        pageMove('/home');
+
       }
 
     return (
