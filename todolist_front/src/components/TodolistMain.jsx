@@ -21,15 +21,18 @@ function TodolistMain() {
     fetchList();
   },[])
 
-  const handleToggleCheck= ()=> {
-    setChecked(!checked);
+  const handleToggleCheck= (e)=> {
+    if(todo.status !== 1){
+      setChecked(!checked);
+
+    }
   }
 
 
   const fetchList = async () => {
     try{
       // 유저 아이디를 받을때 재작성
-      const response = await api.get(`/todolist/`);
+      const response = await api.get('/todolist');
       console.log(response.data);
       setTodolist(response.data);
     }catch(error){
@@ -70,6 +73,8 @@ function TodolistMain() {
     }
   }
 
+  
+
   return (
     <div css={MainCon}>
       <div className="todo-mainContainer">
@@ -106,10 +111,11 @@ function TodolistMain() {
                       <div onClick={handleToggleCheck}
                       css={css`
                         background-color: ${checked ? '#dbdbdb':'#55555'};
-                      `}>
+                      `}
+                      >
                         <li className="todo-card" key={todoItem.todolistId}>
                               <h3 className="todo-date">
-                              <input className="todo-check" type="checkbox" />
+                              <input className="todo-check" type="checkbox" checked={todo.status === 1} onChange={handleToggleCheck}/>
                                 {todoItem.todoDate}
                               </h3>
                               <p className="todo-content">{todoItem.todoTxt}</p>
