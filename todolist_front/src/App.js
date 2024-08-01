@@ -23,7 +23,7 @@ function App() {
           <Route path="/" element={<Navigate to='/home' />} />
           <Route path='home' element={<Login/>} />
           <Route path='Loginnewuser' element={<LoginNewUser/>}/>
-          <Route path='TodoMain' element={<TodolistMain/>} setLoginStatus={setLoginStatus} />
+          <Route path='todolist' element={<TodolistMain/>} setLoginStatus={setLoginStatus} />
           {/* <Route path='TodoComplete' element={<TodolistComplete/>} />
           <Route path='TodoIncomplete' element={<TodolistIncomplete/>} /> */}
         </Routes>
