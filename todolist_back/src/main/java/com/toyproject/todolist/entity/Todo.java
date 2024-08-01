@@ -13,6 +13,7 @@ public class Todo {
     private int todolistId;
     private String todoTxt;
     private LocalDate todoDate;
+    private int todocomplete;
 
     public RespTodoDto.Info todoDto() {
         return RespTodoDto.Info.builder()
@@ -21,6 +22,5 @@ public class Todo {
                 .todoDate(todoDate)
                 .build();
     }
-
 
 }

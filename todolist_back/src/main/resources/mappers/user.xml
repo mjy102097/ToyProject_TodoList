@@ -4,8 +4,43 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.toyproject.todolist.repository.UserMapper">
 
-    <insert id="save">
+    <insert id="save" parameterType="com.toyproject.todolist.entity.User">
         insert into user_tb
-        values(0, #{userName}, #{userPassword})
+        values(0, #{username}, #{password})
     </insert>
+
+    <update id="change">
+        update
+            user_tb
+        set
+            password = #{password}
+        where
+            username = #{username}
+    </update>
+
+    <delete id="delete">
+        delete from user_tb
+        where username = #{username}
+    </delete>
+
+    <select id="login" resultType="com.toyproject.todolist.entity.User">
+        select
+            *
+        from
+            user_tb
+        where
+            username = #{username} and password = #{password}
+    </select>
+
+    <select id="check" resultType="java.lang.Integer">
+        select
+            userId
+        from
+            user_tb
+        where
+            username = #{username}
+
+    </select>
+
+
 </mapper>

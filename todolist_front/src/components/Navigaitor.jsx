@@ -25,7 +25,7 @@ const navlinkStyle = css`
 `
 
 function Navigaitor() {
-  const links = ['HOME','TodoMain','TodoComplete', 'TodoIncomplete'];
+  const links = ['HOME','todolist','TodoComplete', 'TodoIncomplete', 'Login','LoginNewUser'];
 
 
   return (

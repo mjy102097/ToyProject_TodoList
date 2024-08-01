@@ -1,11 +1,11 @@
 package com.toyproject.todolist.service;
 
+import com.toyproject.todolist.dto.ReqUpdateDto;
 import com.toyproject.todolist.dto.ReqTodoDto;
 import com.toyproject.todolist.dto.RespTodoDto;
 import com.toyproject.todolist.entity.Todo;
 import com.toyproject.todolist.repository.TodoListMapper;
-import lombok.Builder;
-import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class TodolistServicempl{
+@Slf4j
+public class TodolistServicempl implements TodolistService{
 
     @Autowired
     private TodoListMapper todoListMapper;
@@ -42,6 +43,37 @@ public class TodolistServicempl{
                 .todoDate(list.getTodoDate())
                 .build()).collect(Collectors.toList());
 
+
+    }
+
+    public int modifyTodo(ReqUpdateDto reqMdDto) {
+        Todo todo = Todo.builder()
+                .todolistId(reqMdDto.getTodolistId())
+                .todoTxt(reqMdDto.getTodoTxt())
+                .todoDate(reqMdDto.getTodoDate())
+                .todocomplete(reqMdDto.getTodocomplete())
+                .build(); // 엔터티
+
+        return todoListMapper.Modify(todo);
+    }
+
+    public int deleteTodo(int todolistId) {
+        return todoListMapper.delete(todolistId);
+    }
+
+    public int completeTodo(ReqUpdateDto reqCoDto){
+        Todo todo = Todo.builder()
+                .todolistId(reqCoDto.getTodolistId())
+                .todoTxt(reqCoDto.getTodoTxt())
+                .todoDate(reqCoDto.getTodoDate())
+                .todocomplete(reqCoDto.getTodocomplete())
+                .build();
+
+        if(todo.getTodocomplete() == 0) {
+            return todoListMapper.Complete(todo);
+        } else {
+            return todoListMapper.NotComplete(todo);
+        }
 
     }
 

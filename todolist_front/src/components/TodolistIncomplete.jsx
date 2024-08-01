@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { MainCon } from '../styles/TodolistMain';
 import ReactModal from 'react-modal';
 import { css } from '@emotion/react';
-import axios from 'axios';
+import api from '../apis/instance';
 
 function TodolistIncomplete() {
   const [ isModaltodo, setIsModalTodo ] = useState (false);
@@ -13,12 +13,12 @@ function TodolistIncomplete() {
     todoTxt : "",
     todoDate : "" 
   });
-  const [ registerTodo, setRegisterTodo ] = useState({
+  // const [ registerTodo, setRegisterTodo ] = useState({
 
-  });
-  const [ selectTodo, setSelectTodo ] = useState({
+  // });
+  // const [ selectTodo, setSelectTodo ] = useState({
 
-  });
+  // });
   const [ params, setParams ] = useState({
     todoTxt : "",
     todoDate : ""
@@ -26,7 +26,7 @@ function TodolistIncomplete() {
 const requestGetTodo = async (todolistId) => { 
   let responseData = null;
   try {
-      const response = await axios.get(`http://localhost:8080/api/v1/todo/${todolistId}`);
+      const response = await api.get(`/userlogin/todo/${todolistId}`);
       console.log(response);
       responseData = response.data;
   } catch(error) {
@@ -36,7 +36,7 @@ const requestGetTodo = async (todolistId) => {
 }
   const requestTodoList = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/v1/todo", {params});
+      const response = await api.get(`/todo/${params}`);
       setTodoList(response.data);
     } catch(e) {
       console.error(e);
@@ -52,7 +52,7 @@ const requestGetTodo = async (todolistId) => {
 const requestDeleteTodo = async (todolistId) => {
     let responseData = null;
     try {
-        const response = await axios.delete(`http://localhost:8080/api/v1/todo/${todolistId}`);
+        const response = await api.delete(`/todo/${todolistId}`);
         responseData = response.data;
     } catch(error) {
         console.error(error);
@@ -80,7 +80,7 @@ const handleUpdateSubmitClick = async () => {
 const requestUpdateTodo = async () => {
     let responseData = null;
     try {
-        const response = await axios.put(`http://localhost:8080/api/v1/todo/${updateTodo.todolistId}`, updateTodo);
+        const response = await api.put(`/todo/${updateTodo.todolistId}`, updateTodo);
         responseData = response.data;
     } catch(error) {
         console.error(error);
