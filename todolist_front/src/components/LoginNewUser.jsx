@@ -64,7 +64,7 @@ function LoginNewUser(props) {
         const registerUser = await api.post('/newuser', user);
         console.log(registerUser);
         alert("회원가입 성공!");
-        pageMove('/Login');
+        pageMove('/home');
       }
     } else {
       console.log(availableId);
