@@ -3,10 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { MainCon } from '../styles/TodolistMain';
 import api from '../apis/instance';
 import { css } from '@emotion/react';
+import { useNavigate } from 'react-router-dom';
 
 
 function TodolistMain() {
-
 
   const [ todo, setTodo ] = useState({
     todoTxt: "",
@@ -17,16 +17,30 @@ function TodolistMain() {
 
   const [todolist, setTodolist] = useState([]);
 
+
   useEffect(() => {
     fetchList();
   },[])
 
-  const handleToggleCheck= (e)=> {
-    if(todo.status !== 1){
-      setChecked(!checked);
-
+  const handleToggleCheck = async (todolistId, currentStatus) => {
+    try {
+      // 토글 상태
+      const newStatus = currentStatus === 1 ? 0 : 1;
+      const response = await api.put(`/todolist/${todolistId}`, { status: newStatus });
+      if (response.status === 200) {
+        // 상태 업데이트
+        console.log(response);
+        setTodolist((prevTodolist) =>
+          prevTodolist.map((item) =>
+            item.todolistId === todolistId ? { ...item, status: newStatus } : item
+          )
+        );
+      }
+    } catch (error) {
+      console.error(error);
+      alert('상태 업데이트 실패!');
     }
-  }
+  };
 
 
   const fetchList = async () => {
@@ -48,10 +62,6 @@ function TodolistMain() {
           [name]: value
     }))
   }
-
-  useEffect(()=> {
-
-  },[])
 
 
   const handleRegisterSubmitClick = async () => {

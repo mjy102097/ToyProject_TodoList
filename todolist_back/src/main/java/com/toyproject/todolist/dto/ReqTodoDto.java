@@ -7,5 +7,5 @@ import java.time.LocalDate;
 @Data
 public class ReqTodoDto {
     private String todoTxt;
-    private LocalDate todoDate;
+    private String todoDate;
 }
