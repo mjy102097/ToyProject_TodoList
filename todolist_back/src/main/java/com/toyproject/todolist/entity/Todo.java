@@ -13,14 +13,14 @@ public class Todo {
     private int todoId;
     private String content;
     private String date;
-    private int status;
+    private int complete;
 
     public RespTodoDto.Info todoDto() {
         return RespTodoDto.Info.builder()
                 .todoId(todoId)
                 .content(content)
                 .date(date)
-                .status(status)
+                .complete(complete)
                 .build();
     }
 

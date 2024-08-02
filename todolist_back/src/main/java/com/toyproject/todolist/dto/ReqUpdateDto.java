@@ -9,6 +9,6 @@ public class ReqUpdateDto {
     private int todoId;
     private String content;
     private String date;
-    private int status;
+    private int complete;
 
 }

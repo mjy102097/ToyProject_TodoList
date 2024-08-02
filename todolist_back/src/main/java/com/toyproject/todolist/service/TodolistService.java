@@ -9,6 +9,7 @@ import java.util.List;
 public interface TodolistService  {
 //    List<RespTodoDto.Info> getTodoListAll(ReqTodoDto reqTodoDto);
     int registerTodoList(ReqTodoDto dto);
+    int countGetcomplete(int todoId);
 //    int deleteTodo(int todolistId);
 //    int modifyTodo(ReqUpdateDto dto);
 //    int completeTodo(ReqUpdateDto dto);

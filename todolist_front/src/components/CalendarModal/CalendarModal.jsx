@@ -25,8 +25,7 @@ const CalendarModal = () => {
 
   const requestTodoList = async (selectedDate) => {
     try {
-      const formattedDate = format(selectedDate, 'yyyy-MM', { locale: ko });
-      const response = await axios.get(`http://localhost:8080/api/v1/todolist`, { params: { month: formattedDate } });
+      const response = await axios.get(`http://localhost:8080/api/v1/todolist`, { registertodo});
       setTodolist(response.data);
     } catch (e) {
       console.error(e);
@@ -101,6 +100,11 @@ const CalendarModal = () => {
 
   const handleEditTodoClick = async () => {
     Swal.fire({
+        input: "text",
+      inputAttributes: {
+      autocapitalize: "off"
+    }
+    }).then({
       title: "수정하시겠습니까?",
       showDenyButton: true,
       showCancelButton: true,
@@ -108,12 +112,23 @@ const CalendarModal = () => {
       denyButtonText: `Don't save`
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire("Saved!", "", "success");
+        Swal.fire("성공", "", "success");
       } else if (result.isDenied) {
-        Swal.fire("Changes are not saved", "", "info");
+        Swal.fire("실패", "", "info");
       }
     });
   };
+
+  const handleStatusClick=async(todoId)=> {
+    try {
+      requestTodoList();
+      const response = await axios.put(`http://localhost:8080/api/v1/todo/${todoId}`);
+      requestTodoList();
+      } catch (error) {
+        console.error(error)
+      }
+        
+  }
 
   const isMarked = (date) => {
     return todolist.some(todo => todo.date === format(date, 'yyyy년 M월 d일', { locale: ko }));
@@ -142,7 +157,7 @@ const CalendarModal = () => {
           showNeighboringMonth={false}
           tileContent={tileContent}
           onClickDay={() => setIsModalOpen(true)}
-          value={date}
+          value={date.value}
         />
       </div>
       <div className='todo-list'>
@@ -155,7 +170,7 @@ const CalendarModal = () => {
               <li key={index}>
                 <p>{item.date}</p>
                 <p>{item.content}</p> 
-                <button>✔</button>
+                <button onClick={() => handleStatusClick(item.todoId)}>✔</button>
                 <button onClick={handleEditTodoClick}>🖍</button>
                 <button onClick={() => handleDeleteTodoClick(item.todoId)}>✂</button>
               </li>

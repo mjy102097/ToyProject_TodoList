@@ -41,8 +41,12 @@ public class TodolistServicempl implements TodolistService{
                 .todoId(list.getTodoId())
                 .content(list.getContent())
                 .date(list.getDate())
-                .status(list.getStatus())
+                .complete(list.getComplete())
                 .build()).collect(Collectors.toList());
+    }
+
+    public int countGetcomplete (int todoId){
+        return todoListMapper.Modifycomplete(todoId);
     }
 //
 //    public int modifyTodo(ReqUpdateDto reqMdDto) {

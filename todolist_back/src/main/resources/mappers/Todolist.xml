@@ -8,7 +8,15 @@
         insert into todolist_tb
         values (0, #{content} , #{date}, 0)
     </insert>
-<!--    <update id="Modify" parameterType="integer">-->
+    <update id="Modifycomplete">
+                update
+                    todolist_tb
+                set
+                    complete = not complete
+                where
+                    todoId = #{todoId}
+    </update>
+    <!--    <update id="Modify" parameterType="integer">-->
 <!--        update-->
 <!--            todolist_tb-->
 <!--        set-->
@@ -32,6 +40,7 @@
 <!--        where-->
 <!--            todolistId = #{todolistId}-->
 <!--    </update>-->
+
 
 <!--    <delete id="delete" parameterType="integer">-->
 <!--        delete-->

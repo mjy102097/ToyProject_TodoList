@@ -29,4 +29,11 @@ public class TodoListController {
     public ResponseEntity<?> todoListApi(ReqTodoDto reqDto){
         return ResponseEntity.ok().body(todolistService.getTodoListAll(reqDto));
     }
+
+    @PutMapping("/todo/{todoId}")
+    public ResponseEntity<?> todoIdPut(@PathVariable int todoId){
+        System.out.println(todoId);
+        return ResponseEntity.ok().body(todolistService.countGetcomplete(todoId));
+    }
+
 }
