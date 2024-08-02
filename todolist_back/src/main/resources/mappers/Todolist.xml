@@ -8,7 +8,7 @@
         insert into todolist_tb
         values (0, #{content} , #{date}, 0)
     </insert>
-    <update id="Modifycomplete">
+    <update id="Modifycomplete" parameterType="com.toyproject.todolist.entity.Todo">
                 update
                     todolist_tb
                 set
@@ -16,39 +16,24 @@
                 where
                     todoId = #{todoId}
     </update>
-    <!--    <update id="Modify" parameterType="integer">-->
-<!--        update-->
-<!--            todolist_tb-->
-<!--        set-->
-<!--            todoTxt = #{todoTxt} , todoDate = #{todoDate}-->
-<!--        where-->
-<!--            todolistId = #{todolistId}-->
-<!--    </update>-->
-<!--    <update id="Complete" parameterType="integer">-->
-<!--        update-->
-<!--            todolist_tb-->
-<!--        set-->
-<!--            todocomplete = 1-->
-<!--        where-->
-<!--            todolistId = #{todolistId}-->
-<!--    </update>-->
-<!--    <update id="NotComplete" parameterType="integer">-->
-<!--        update-->
-<!--            todolist_tb-->
-<!--        set-->
-<!--            todocomplete = 0-->
-<!--        where-->
-<!--            todolistId = #{todolistId}-->
-<!--    </update>-->
+    <update id="edit" parameterType="com.toyproject.todolist.entity.Todo">
+        update
+        todolist_tb
+        set
+        content = #{content}
+        where
+        todoId = #{todoId}
+    </update>
 
 
-<!--    <delete id="delete" parameterType="integer">-->
-<!--        delete-->
-<!--        from-->
-<!--            todolist_tb-->
-<!--        where-->
-<!--            todolistId =#{id}-->
-<!--    </delete>-->
+    <delete id="delete">
+        delete
+        from
+        todolist_tb
+        where
+        todoId = #{todoId}
+    </delete>
+
     <select id="findTodoList"
         parameterType="com.toyproject.todolist.entity.Todo"
         resultType="com.toyproject.todolist.entity.Todo">
@@ -57,6 +42,18 @@
             *
         from
             todolist_tb
+    </select>
+
+    <select id="findTodoById" resultType="com.toyproject.todolist.entity.Todo" parameterType="com.toyproject.todolist.entity.Todo">
+        select
+        todoId,
+        content,
+        date,
+        complete
+        from
+        todolist_tb
+        where
+        todoId = #{id}
     </select>
 
 </mapper>

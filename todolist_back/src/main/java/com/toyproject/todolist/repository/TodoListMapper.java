@@ -9,9 +9,8 @@ import java.util.List;
 public interface TodoListMapper {
     int save(Todo todo);
     List<Todo> findTodoList(Todo todo);
-    int Modifycomplete(int id);
-//    int delete(int id);
-//    int Modify(Todo todo);
-//    int Complete(Todo todo);
-//    int NotComplete(Todo todo);
+    int Modifycomplete(Todo todo);
+    int delete(int todoId);
+    int edit(Todo todo);
+    Todo findTodoById(int id);
 }

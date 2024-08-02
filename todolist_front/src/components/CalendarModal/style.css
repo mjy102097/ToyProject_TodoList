@@ -13,6 +13,9 @@
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
+.hidden {
+  display: none;
+}
   
 /* 기본 캘린더 스타일을 유지하되, 커스터마이징하려면 여기에서 수정하세요. */
 .react-calendar {
