@@ -22,7 +22,7 @@ border-radius: 5px;
 border: 1px solid #ccc;
 }
 
-.clickbutton {
+.click-button {
 padding: 10px 20px;
 border: none;
 border-radius: 5px;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import { MainCon } from '../styles/TodolistMain';
 import ReactModal from 'react-modal';
@@ -13,16 +13,14 @@ function TodolistIncomplete() {
     todoTxt : "",
     todoDate : "" 
   });
-  // const [ registerTodo, setRegisterTodo ] = useState({
-
-  // });
-  // const [ selectTodo, setSelectTodo ] = useState({
-
-  // });
   const [ params, setParams ] = useState({
     todoTxt : "",
     todoDate : ""
 })
+useEffect(() => {
+  requestTodoList();
+}, []);
+
 const requestGetTodo = async (todolistId) => { 
   let responseData = null;
   try {
@@ -41,6 +39,21 @@ const requestGetTodo = async (todolistId) => {
     } catch(e) {
       console.error(e);
     }
+  }
+  const handleSearchChange = (e) => {
+    setParams(sparams => {
+      return {
+        ...sparams,
+        [e.target.name] : e.target.value
+      }
+    })
+  }
+  const handleSearchClick = () => {
+    requestTodoList();
+    setParams({
+      todoTxt : "",
+      todoDate : ""
+    })
   }
   const handleDeleteTodoClick = async (todolistId) => {
     if(window.confirm("삭제하시겠습니까?")) {
@@ -85,6 +98,7 @@ const requestUpdateTodo = async () => {
     } catch(error) {
         console.error(error);
     }
+    return responseData;
 }
 const handleUpdateInputChange = (e) => {
   setUpdateTodo(uctodo => {
@@ -120,7 +134,11 @@ const handleUpdateInputChange = (e) => {
         height: 100%;
       `}>
           <h2>할 일 수정</h2>
-            <input type='text' name='todoTxt' onChange={handleUpdateInputChange} value={updateTodo.todoTxt} disabled={true}/>
+            <input type='text' name='todoTxt' 
+            onChange={handleUpdateInputChange} 
+            value={updateTodo.todoTxt} 
+            disabled={true}
+            />
           <div>
             <button onClick={handleUpdateSubmitClick}>확인</button>
             <button onClick={() => closeModalTodo()}>취소</button>
@@ -131,8 +149,8 @@ const handleUpdateInputChange = (e) => {
       <div className="todo-mainContainer">
         <h1 className="title">Todo Incomplate List</h1>
         <div className="input-box">
-            <input type="text" className="todo-input" />
-            <button className="button todo-submit">조회</button>
+            <input type="text" className="todo-input" onChange={handleSearchChange} value={params.todoTxt} placeholder='할 일'/>
+            <button className="button todo-submit" onClick={handleSearchClick} value={params.todoDate} >조회</button>
         </div>
         <div className="todo-container">
             <ul className="todo-list-container">
@@ -140,8 +158,10 @@ const handleUpdateInputChange = (e) => {
                     <h3 className="todo-date">날짜</h3>
                     <p className="todo-content">오늘 할 일</p>
                     <div className="todo-buttons">
-                        <button className="button edit-button" onClick={handleUpdateTodoClick}>수정</button>
-                        <button className="button delete-button" onClick={handleDeleteTodoClick}>삭제</button>
+                        <button className="button edit-button" 
+                        onClick={handleUpdateTodoClick}>수정</button>
+                        <button className="button delete-button" 
+                        onClick={handleDeleteTodoClick}>삭제</button>
                     </div>
                 </li>
             </ul>

@@ -54,4 +54,21 @@ public class UserServiceImpl implements UserService {
                 .password(newUser.getPassword())
                 .build();
     }
+
+    // 회원탈퇴
+    public int deleteUser(ReqUserDto dto) {
+        User user = User.builder()
+                .username(dto.getUsername())
+                .build();
+        return userMapper.delete(user);
+    }
+
+    @Override
+    public int changePassword(ReqUserDto dto) {
+        User user = User.builder()
+                .username(dto.getUsername())
+                .password(dto.getPassword())
+                .build();
+        return userMapper.change(user);
+    }
 }

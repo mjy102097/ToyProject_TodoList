@@ -9,4 +9,6 @@ public interface  UserService {
     int registerUser(ReqUserDto dto);
     int checkUser(ReqUserDto dto);
     RespUserDto loginUser(ReqUserDto dto);
+    int deleteUser(ReqUserDto dto);
+    int changePassword (ReqUserDto dto);
 }

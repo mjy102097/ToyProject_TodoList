@@ -3,7 +3,6 @@ package com.toyproject.todolist.controller;
 import com.toyproject.todolist.dto.ReqUserDto;
 import com.toyproject.todolist.dto.RespUserDto;
 import com.toyproject.todolist.service.UserService;
-import com.toyproject.todolist.service.UserServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -53,4 +52,18 @@ public class UserController {
             return ResponseEntity.ok().body(user);
         }
     }
+
+    // 회원탈퇴
+    @DeleteMapping
+    public ResponseEntity<?> deleteUser(@RequestBody ReqUserDto reqUserDto) {
+        log.info("{}", reqUserDto);
+        return ResponseEntity.ok().body(userService.deleteUser(reqUserDto));
+    }
+
+    // 회원 비밀번호 수정
+    @PutMapping
+    public ResponseEntity changePassword(@RequestBody ReqUserDto reqUserDto) {
+        return ResponseEntity.ok().body(userService.changePassword(reqUserDto));;
+    }
+    
 }

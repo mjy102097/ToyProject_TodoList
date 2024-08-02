@@ -12,9 +12,8 @@ import LoginNewUser from './components/LoginNewUser';
 import { useState } from 'react';
 import CalendarModal from './components/CalendarModal/CalendarModal';
 
+
 function App() {
-  const [ loginStatus, setLoginStatus ] = useState(false);
-  
   return (
     <>
     <div>
@@ -24,15 +23,13 @@ function App() {
         <Navigaitor/>
         <HighMenu/>
         <Routes>
-          <Route path="/" element={<Navigate to="<Login/>" />} />
-          <Route path='home' element={<Login/>} />
+          <Route path="/" element={<Navigate to="/login" />} />
+          <Route path='Login' element={<Login/>} />
           <Route path='Loginnewuser' element={<LoginNewUser/>}/>
           <Route path='todolist' element={<TodolistMain/>} setLoginStatus={setLoginStatus} />
-          {/* <Route path='TodoComplete' element={<TodolistComplete/>} />
-          <Route path='TodoIncomplete' element={<TodolistIncomplete/>} /> 
-        </Routes> */}
+        </Routes>
+
     </>
   );
 }
-
 export default App;
