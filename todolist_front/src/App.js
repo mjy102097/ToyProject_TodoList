@@ -9,21 +9,26 @@ import TodolistIncomplete from './components/TodolistIncomplete';
 import HighMenu from './components/HighMenu';
 import Login from './components/Login';
 import LoginNewUser from './components/LoginNewUser';
+import { useState } from 'react';
+import CalendarModal from './components/CalendarModal/CalendarModal';
+
 
 function App() {
   return (
     <>
-      <Global styles={reset} />
+    <div>
+          <CalendarModal/>
+          </div>
+      {/* <Global styles={reset} />
         <Navigaitor/>
         <HighMenu/>
         <Routes>
           <Route path="/" element={<Navigate to="/login" />} />
           <Route path='Login' element={<Login/>} />
           <Route path='Loginnewuser' element={<LoginNewUser/>}/>
-          <Route path='TodoMain' element={<TodolistMain/>} />
-          <Route path='TodoComplete' element={<TodolistComplete/>} />
-          <Route path='TodoIncomplete' element={<TodolistIncomplete/>} />
+          <Route path='todolist' element={<TodolistMain/>} setLoginStatus={setLoginStatus} />
         </Routes>
+
     </>
   );
 }

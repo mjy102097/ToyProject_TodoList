@@ -16,8 +16,7 @@ public class RespTodoDto {
     public static class Info {
         private int todolistId;
         private String todoTxt;
-        private LocalDate todoDate;
-        private int todoComplete;
+        private String todoDate;
     }
 
     public static List<Info> toList(List<Todo> todoList) {

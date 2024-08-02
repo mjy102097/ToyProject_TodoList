@@ -9,17 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin
 @Slf4j
 @RestController
+//@RequestMapping("/api/v1")
 public class TodoListController {
 
     @Autowired
     private TodolistService todolistService;
-
-    @PostMapping("/todo")
+    @PostMapping("/api/v1/todo")
     public ResponseEntity<?> createTodo(@RequestBody ReqTodoDto reqDto){
-        log.info("Todo 성공 : {}" , reqDto);
+        System.out.println(reqDto);
+        log.info("{}", reqDto);
         return ResponseEntity.ok().body(todolistService.registerTodoList(reqDto));
     }
 
@@ -28,7 +28,8 @@ public class TodoListController {
         return ResponseEntity.ok().body(todolistService.getTodoListAll(reqDto));
     }
 
-    @DeleteMapping("/todolist/{todolistId}")
+
+    @DeleteMapping("/todo/{todolistId}")
     public ResponseEntity<?> todoDeleteTodo(@PathVariable int todolistId ) {
         return ResponseEntity.ok().body(todolistService.deleteTodo(todolistId));
     }

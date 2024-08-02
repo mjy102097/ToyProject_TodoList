@@ -24,7 +24,7 @@ public class TodolistServicempl implements TodolistService{
                 .todoTxt(dto.getTodoTxt())
                 .todoDate(dto.getTodoDate())
                 .build();
-
+        System.out.println(todo);
         return todoListMapper.save(todo);
     }
 
@@ -51,7 +51,6 @@ public class TodolistServicempl implements TodolistService{
                 .todolistId(reqMdDto.getTodolistId())
                 .todoTxt(reqMdDto.getTodoTxt())
                 .todoDate(reqMdDto.getTodoDate())
-                .todocomplete(reqMdDto.getTodocomplete())
                 .build(); // 엔터티
 
         return todoListMapper.Modify(todo);
@@ -66,15 +65,10 @@ public class TodolistServicempl implements TodolistService{
                 .todolistId(reqCoDto.getTodolistId())
                 .todoTxt(reqCoDto.getTodoTxt())
                 .todoDate(reqCoDto.getTodoDate())
-                .todocomplete(reqCoDto.getTodocomplete())
                 .build();
 
-        if(todo.getTodocomplete() == 0) {
-            return todoListMapper.Complete(todo);
-        } else {
-            return todoListMapper.NotComplete(todo);
-        }
 
+        return 0;
     }
 
 }

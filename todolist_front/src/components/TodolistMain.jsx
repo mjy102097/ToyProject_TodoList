@@ -3,15 +3,63 @@ import React, { useState } from 'react';
 import { MainCon } from '../styles/TodolistMain';
 import axios from 'axios';
 import api from '../apis/instance';
+import { css } from '@emotion/react';
 import { useNavigate } from 'react-router-dom';
+
 
 function TodolistMain() {
   const logout = useNavigate();
 
+
+  const [ todo, setTodo ] = useState({
+
   const [ todoList, setTodoList ] = useState({
+
     todoTxt: "",
     todoDate: ""
   });
+
+
+  const [ checked , setChecked ] =useState(false);
+
+  const [todolist, setTodolist] = useState([]);
+
+
+  useEffect(() => {
+    fetchList();
+  },[])
+
+  const handleToggleCheck = async (todolistId, currentStatus) => {
+    try {
+      // 토글 상태
+      const newStatus = currentStatus === 1 ? 0 : 1;
+      const response = await api.put(`/todolist/${todolistId}`, { status: newStatus });
+      if (response.status === 200) {
+        // 상태 업데이트
+        console.log(response);
+        setTodolist((prevTodolist) =>
+          prevTodolist.map((item) =>
+            item.todolistId === todolistId ? { ...item, status: newStatus } : item
+          )
+        );
+      }
+    } catch (error) {
+      console.error(error);
+      alert('상태 업데이트 실패!');
+    }
+  };
+
+
+  const fetchList = async () => {
+    try{
+      // 유저 아이디를 받을때 재작성
+      const response = await api.get('/todolist');
+      console.log(response.data);
+      setTodolist(response.data);
+    }catch(error){
+      console.log(error)
+    }
+  }
 
   const handleRegisterInputChange = (e) => {
     setTodoList(todoList => {
@@ -21,6 +69,7 @@ function TodolistMain() {
         }
     })
   }
+
 
   const handleRegisterSubmitClick = async () => {
     try {

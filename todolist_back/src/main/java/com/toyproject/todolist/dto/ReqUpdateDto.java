@@ -8,6 +8,6 @@ import java.time.LocalDate;
 public class ReqUpdateDto {
     private int todolistId;
     private String todoTxt;
-    private LocalDate todoDate;
-    private int todocomplete;
+    private String todoDate;
+
 }

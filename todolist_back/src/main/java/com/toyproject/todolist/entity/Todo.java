@@ -12,8 +12,7 @@ import java.time.LocalDate;
 public class Todo {
     private int todolistId;
     private String todoTxt;
-    private LocalDate todoDate;
-    private int todocomplete;
+    private String todoDate;
 
     public RespTodoDto.Info todoDto() {
         return RespTodoDto.Info.builder()
