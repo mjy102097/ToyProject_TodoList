@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import { MainCon } from '../styles/TodolistMain';
-import axios from 'axios';
 import api from '../apis/instance';
 import { css } from '@emotion/react';
 import { useNavigate } from 'react-router-dom';
 
 
 function TodolistMain() {
+
   const logout = useNavigate();
+
 
   const [ todo, setTodo ] = useState({
     todoTxt: "",
@@ -57,6 +58,14 @@ function TodolistMain() {
   }
 
   const handleRegisterInputChange = (e) => {
+
+    const {name , value} = e.target
+    console.log(value);
+    setTodo(todo => ({
+          ...todo,
+          [name]: value
+    }))
+
     setTodo(todoList => {
       return {
           ...todoList,
@@ -68,15 +77,22 @@ function TodolistMain() {
 
   const handleRegisterSubmitClick = async () => {
     try {
-      const response = await api.post("/todolist", todoList);
+      const response = await api.post("/todolist", todo);
       if(response.status === 200) {
+        setTodolist(prevTodolist => [...prevTodolist,response.data])
         console.log(response.data);
+        setTodo({
+          todoTxt: "",
+          todoDate: ""
+      });
         alert("등록성공!");
+        
       }
     } catch (error) {
       console.error(error);
       alert("등록실패!");
     }
+
 
     setTodo(todoList => {
       return{
@@ -89,7 +105,10 @@ function TodolistMain() {
     //   alert("할 일 다하셨나요?");
     //   logout("/home");
     // };
+
   }
+
+  
 
   return (
     <div css={MainCon}>
@@ -113,14 +132,34 @@ function TodolistMain() {
         
         <div className="todo-container">
             <ul className="todo-list-container">
+              <div>
                 <li className="todo-card">
-                    <h3 className="todo-date">날짜</h3>
+                    <h3 className="todo-date">
+                    <input className="todo-check" type="checkbox" />
+                      날짜</h3>
                     <p className="todo-content">오늘 할 일</p>
                 </li>
-            </ul>
-            <div>
-              {/* <button onClick={handlelogoutClick}><p>로그아웃</p></button> */}
-            </div>
+              </div>
+                {
+                  todolist.map(todoItem => 
+
+                      <div onClick={handleToggleCheck}
+                      css={css`
+                        background-color: ${checked ? '#dbdbdb':'#55555'};
+                      `}
+                      >
+                        <li className="todo-card" key={todoItem.todolistId}>
+                              <h3 className="todo-date">
+                              <input className="todo-check" type="checkbox" checked={todo.status === 1} onChange={handleToggleCheck}/>
+                                {todoItem.todoDate}
+                              </h3>
+                              <p className="todo-content">{todoItem.todoTxt}</p>
+                        </li>
+                      </div>
+                  )  
+                  }
+                </ul>
+            
         </div>
     </div>
     </div>

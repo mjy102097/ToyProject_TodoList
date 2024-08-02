@@ -6,8 +6,9 @@ import java.time.LocalDate;
 
 @Data
 public class ReqUpdateDto {
-    private int todolistId;
-    private String todoTxt;
-    private String todoDate;
+    private int todoId;
+    private String content;
+    private String date;
+    private int status;
 
 }

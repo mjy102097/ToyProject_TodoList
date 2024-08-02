@@ -14,9 +14,10 @@ public class RespTodoDto {
     @Builder
     @Data
     public static class Info {
-        private int todolistId;
-        private String todoTxt;
-        private String todoDate;
+        private int todoId;
+        private String content;
+        private String date;
+        private int status;
     }
 
     public static List<Info> toList(List<Todo> todoList) {
