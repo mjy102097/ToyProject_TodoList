@@ -10,15 +10,17 @@ import java.time.LocalDate;
 @Builder
 @Data
 public class Todo {
-    private int todolistId;
-    private String todoTxt;
-    private String todoDate;
+    private int todoId;
+    private String content;
+    private String date;
+    private int status;
 
     public RespTodoDto.Info todoDto() {
         return RespTodoDto.Info.builder()
-                .todolistId(todolistId)
-                .todoTxt(todoTxt)
-                .todoDate(todoDate)
+                .todoId(todoId)
+                .content(content)
+                .date(date)
+                .status(status)
                 .build();
     }
 

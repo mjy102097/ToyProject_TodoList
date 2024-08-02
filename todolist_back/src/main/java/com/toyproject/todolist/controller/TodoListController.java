@@ -23,24 +23,24 @@ public class TodoListController {
         return ResponseEntity.ok().body(todolistService.registerTodoList(reqDto));
     }
 
-    @GetMapping("/todolist")
-    public ResponseEntity<?> todoListApi(ReqTodoDto reqDto){
-        return ResponseEntity.ok().body(todolistService.getTodoListAll(reqDto));
-    }
-
-
-    @DeleteMapping("/todo/{todolistId}")
-    public ResponseEntity<?> todoDeleteTodo(@PathVariable int todolistId ) {
-        return ResponseEntity.ok().body(todolistService.deleteTodo(todolistId));
-    }
-
-    @PutMapping("/todolist/{todolistId}")
-    public  ResponseEntity<?> todoModify(@PathVariable int todolistId , @RequestBody ReqUpdateDto reqDto){
-        return ResponseEntity.ok().body(todolistService.modifyTodo(reqDto));
-    }
-
-    @PostMapping("/")
-    public ResponseEntity<?> todoComplete(@PathVariable int todolistId, @RequestBody ReqUpdateDto reqDto){
-        return ResponseEntity.ok().body(todolistService.completeTodo(reqDto));
-    }
+//    @GetMapping("/todolist")
+//    public ResponseEntity<?> todoListApi(ReqTodoDto reqDto){
+//        return ResponseEntity.ok().body(todolistService.getTodoListAll(reqDto));
+//    }
+//
+//
+//    @DeleteMapping("/todo/{todolistId}")
+//    public ResponseEntity<?> todoDeleteTodo(@PathVariable int todolistId ) {
+//        return ResponseEntity.ok().body(todolistService.deleteTodo(todolistId));
+//    }
+//
+//    @PutMapping("/todolist/{todolistId}")
+//    public  ResponseEntity<?> todoModify(@PathVariable int todolistId , @RequestBody ReqUpdateDto reqDto){
+//        return ResponseEntity.ok().body(todolistService.modifyTodo(reqDto));
+//    }
+//
+//    @PostMapping("/")
+//    public ResponseEntity<?> todoComplete(@PathVariable int todolistId, @RequestBody ReqUpdateDto reqDto){
+//        return ResponseEntity.ok().body(todolistService.completeTodo(reqDto));
+//    }
 }

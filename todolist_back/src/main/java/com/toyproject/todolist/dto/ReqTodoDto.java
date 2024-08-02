@@ -6,6 +6,6 @@ import java.time.LocalDate;
 
 @Data
 public class ReqTodoDto {
-    private String todoTxt;
-    private String todoDate;
+    private String content;
+    private String date;
 }
