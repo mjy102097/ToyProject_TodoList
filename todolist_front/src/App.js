@@ -4,22 +4,18 @@ import {reset} from './styles/Global'
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Navigaitor from './components/Navigaitor';
 import TodolistMain from './components/TodolistMain';
-import TodolistComplete from './components/TodolistComplete';
-import TodolistIncomplete from './components/TodolistIncomplete';
 import HighMenu from './components/HighMenu';
 import Login from './components/Login';
 import LoginNewUser from './components/LoginNewUser';
-import { useState } from 'react';
 import CalendarModal from './components/CalendarModal/CalendarModal';
 
 
 function App() {
   return (
     <>
-    <div>
-          <CalendarModal/>
-          </div>
-      {/* <Global styles={reset} />
+      <div>
+        <CalendarModal/>  
+        <Global styles={reset} />
         <Navigaitor/>
         <HighMenu/>
         <Routes>
@@ -28,7 +24,7 @@ function App() {
           <Route path='Loginnewuser' element={<LoginNewUser/>}/>
           <Route path='todolist' element={<TodolistMain/>} setLoginStatus={setLoginStatus} />
         </Routes>
-
+      </div>
     </>
   );
 }

@@ -63,7 +63,7 @@ public class UserController {
     // 회원 비밀번호 수정
     @PutMapping
     public ResponseEntity changePassword(@RequestBody ReqUserDto reqUserDto) {
-        return ResponseEntity.ok().body(userService.changePassword(reqUserDto));;
+        return ResponseEntity.ok().body(userService.changePassword(reqUserDto));
     }
     
 }

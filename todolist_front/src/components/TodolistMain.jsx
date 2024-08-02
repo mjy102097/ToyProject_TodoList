@@ -10,15 +10,10 @@ import { useNavigate } from 'react-router-dom';
 function TodolistMain() {
   const logout = useNavigate();
 
-
   const [ todo, setTodo ] = useState({
-
-  const [ todoList, setTodoList ] = useState({
-
     todoTxt: "",
     todoDate: ""
   });
-
 
   const [ checked , setChecked ] =useState(false);
 
@@ -37,7 +32,7 @@ function TodolistMain() {
       if (response.status === 200) {
         // 상태 업데이트
         console.log(response);
-        setTodolist((prevTodolist) =>
+        setTodo((prevTodolist) =>
           prevTodolist.map((item) =>
             item.todolistId === todolistId ? { ...item, status: newStatus } : item
           )
@@ -55,14 +50,14 @@ function TodolistMain() {
       // 유저 아이디를 받을때 재작성
       const response = await api.get('/todolist');
       console.log(response.data);
-      setTodolist(response.data);
+      setTodo(response.data);
     }catch(error){
       console.log(error)
     }
   }
 
   const handleRegisterInputChange = (e) => {
-    setTodoList(todoList => {
+    setTodo(todoList => {
       return {
           ...todoList,
           [e.target.name]: e.target.value
@@ -83,7 +78,7 @@ function TodolistMain() {
       alert("등록실패!");
     }
 
-    setTodoList(todoList => {
+    setTodo(todoList => {
       return{
         todoTxt: "",
         todoDate: ""
@@ -104,12 +99,12 @@ function TodolistMain() {
         <input type="text" className="todo-input" 
           name='todoTxt'
           onChange={handleRegisterInputChange}
-          value={todoList.todoTxt}
+          value={todo.todoTxt}
         />
         <input type="date" className="todo-input"
           name='todoDate'
           onChange={handleRegisterInputChange}
-          value={todoList.todoDate}
+          value={todo.todoDate}
         />
         <button className="button todo-submit" onClick={handleRegisterSubmitClick}>추가</button>
         <button className="button edit-button">수정</button>
