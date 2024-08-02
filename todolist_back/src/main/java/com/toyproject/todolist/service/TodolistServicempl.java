@@ -16,35 +16,34 @@ import java.util.stream.Collectors;
 @Slf4j
 public class TodolistServicempl implements TodolistService{
 
-//    @Autowired
-//    private TodoListMapper todoListMapper;
+        @Autowired
+        private TodoListMapper todoListMapper;
 //
-//    public int registerTodoList(ReqTodoDto dto){
-//        Todo todo = Todo.builder()
-//                .todoTxt(dto.getTodoTxt())
-//                .todoDate(dto.getTodoDate())
-//                .build();
-//        System.out.println(todo);
-//        return todoListMapper.save(todo);
-//    }
-//
-//
-//    public List<RespTodoDto.Info> getTodoListAll(ReqTodoDto reqDto) {
-//        Todo todo = Todo.builder()
-//                .todoTxt(reqDto.getTodoTxt())
-//                .todoDate(reqDto.getTodoDate())
-//                .build();
-//
-//        List<Todo> todos = todoListMapper.findTodoList(todo);
-//
-//        return todos.stream().map(list -> RespTodoDto.Info.builder()
-//                .todolistId(list.getTodolistId())
-//                .todoTxt(list.getTodoTxt())
-//                .todoDate(list.getTodoDate())
-//                .build()).collect(Collectors.toList());
+    public int registerTodoList(ReqTodoDto dto){
+        Todo todo = Todo.builder()
+                .content(dto.getContent())
+                .date(dto.getDate())
+                .build();
+        System.out.println(todo);
+        return todoListMapper.save(todo);
+    }
 //
 //
-//    }
+    public List<RespTodoDto.Info> getTodoListAll(ReqTodoDto reqDto) {
+        Todo todo = Todo.builder()
+                .content(reqDto.getContent())
+                .date(reqDto.getDate())
+                .build();
+
+        List<Todo> todos = todoListMapper.findTodoList(todo);
+
+        return todos.stream().map(list -> RespTodoDto.Info.builder()
+                .todoId(list.getTodoId())
+                .content(list.getContent())
+                .date(list.getDate())
+                .status(list.getStatus())
+                .build()).collect(Collectors.toList());
+    }
 //
 //    public int modifyTodo(ReqUpdateDto reqMdDto) {
 //        Todo todo = Todo.builder()

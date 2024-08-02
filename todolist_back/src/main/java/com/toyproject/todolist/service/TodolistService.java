@@ -7,9 +7,9 @@ import com.toyproject.todolist.dto.RespTodoDto;
 import java.util.List;
 
 public interface TodolistService  {
-    List<RespTodoDto.Info> getTodoListAll(ReqTodoDto reqTodoDto);
+//    List<RespTodoDto.Info> getTodoListAll(ReqTodoDto reqTodoDto);
     int registerTodoList(ReqTodoDto dto);
-    int deleteTodo(int todolistId);
-    int modifyTodo(ReqUpdateDto dto);
-    int completeTodo(ReqUpdateDto dto);
+//    int deleteTodo(int todolistId);
+//    int modifyTodo(ReqUpdateDto dto);
+//    int completeTodo(ReqUpdateDto dto);
 }

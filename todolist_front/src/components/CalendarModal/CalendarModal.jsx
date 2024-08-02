@@ -6,6 +6,7 @@ import { ko } from 'date-fns/locale';
 import './style.css'; // 추가한 CSS 파일을 import 합니다
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import api from '../../apis/instance';
 
 
 Modal.setAppElement('#root');
@@ -14,8 +15,8 @@ const CalendarModal = () => {
   const [date, setDate] = useState(new Date());
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [registertodo, setRegistertodo] = useState({
-    todoDate: "",
-    todoTxt: ""
+    date: "",
+    content: ""
   });
 
   const handleDateChange = (newDate) => {
@@ -24,7 +25,7 @@ const CalendarModal = () => {
 
   const [params, setParams] = useState({
     date: "",
-    todoTxt: ""
+    content: ""
   });
   const [todolist, setTodolist] = useState([]);
 
@@ -43,8 +44,8 @@ const CalendarModal = () => {
     setRegistertodo(todo => {
       return {
         ...todo,
-        todoTxt: e.target.value,
-        todoDate: format(date, 'yyyy년 M월 d일', { locale: ko }),
+        content: e.target.value,
+        date: format(date, 'yyyy년 M월 d일', { locale: ko }),
       };
     });
   };
@@ -55,13 +56,14 @@ const CalendarModal = () => {
     await requestTodoList();
     console.log(todolist);
     setRegistertodo({
-      todoTxt: ""
+      content: ""
     });
   };
 
   const handleRegisterSubmitClick = async () => { // 입력한 date, 내용 백으로 요청
+    console.log("ㅇㅇ",  registertodo);
     try {
-      const response = await axios.post("http://localhost:8080/api/v1/todo", registertodo);
+      const response = await api.post("/todo", registertodo);
       console.log(response.data);
       if(response.status === 200) {
           alert("등록성공!");
@@ -113,7 +115,7 @@ const CalendarModal = () => {
       confirmButtonText: "삭제"
     }).then(async (result) => {
       await requestdeleteTodo(todoId);
-      await requestTodoList();
+      // await requestTodoList();
         Swal.fire({
           title: "삭제완료",
           text: "Todo가 삭제되었습니다",
@@ -145,9 +147,9 @@ const CalendarModal = () => {
     
   }
 
-  // useEffect(()=> {
-  //   requestTodoList(date)
-  // },[date])
+  useEffect(()=> {
+    requestTodoList(date)
+  },[date])
 
   const isMarked = (date) => {
     return todolist.some(
@@ -189,7 +191,7 @@ const CalendarModal = () => {
             {filteredItems.map((item, index) => (
               <li key={index}>
                   <p>{item.date}</p>
-                  <p>{item.todoTxt}</p> 
+                  <p>{item.content}</p> 
                   <button>✔</button>
                   <button onClick={handleEditTodoClick}>🖍</button>
                   <button onClick={() => handleDeleteTodoClick(item.todoId)}>✂</button>
@@ -220,7 +222,7 @@ const CalendarModal = () => {
         </h2>
         <input
           type="text"
-          value={registertodo.todoTxt}
+          value={registertodo.content}
           onChange={handleInputChange}
           placeholder="Enter something"
         />
@@ -228,7 +230,7 @@ const CalendarModal = () => {
         <div className="list-container">
           <ul>
             {filteredItems2.map((item, index) => (
-              <li key={index}>{item.todoTxt}</li>
+              <li key={index}>{item.content}</li>
             ))}
           </ul>
         </div>

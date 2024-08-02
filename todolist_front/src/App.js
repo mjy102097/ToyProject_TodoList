@@ -14,16 +14,19 @@ function App() {
   return (
     <>
       <div>
-        <CalendarModal/>  
+        {/* <CalendarModal/>   */}
         <Global styles={reset} />
         <Navigaitor/>
         <HighMenu/>
-        <Routes>
+        {/* <Routes>
           <Route path="/" element={<Navigate to="/login" />} />
-          <Route path='Login' element={<Login/>} />
-          <Route path='Loginnewuser' element={<LoginNewUser/>}/>
-          <Route path='todolist' element={<TodolistMain/>} setLoginStatus={setLoginStatus} />
-        </Routes>
+          <Route path='/Login' element={<Login/>} />
+          <Route path='/Loginnewuser' element={<LoginNewUser/>}/>
+          <Route path='/todolist' element={<TodolistMain/>}  />
+          {/* setLoginStatus={setLoginStatus} 
+          <Route path='/CalendarModal'element={<CalendarModal/>}/>
+        </Routes> */}
+        <CalendarModal/>
       </div>
     </>
   );
