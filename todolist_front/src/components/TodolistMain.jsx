@@ -8,6 +8,9 @@ import { useNavigate } from 'react-router-dom';
 
 function TodolistMain() {
 
+  const logout = useNavigate();
+
+
   const [ todo, setTodo ] = useState({
     todoTxt: "",
     todoDate: ""
@@ -30,7 +33,7 @@ function TodolistMain() {
       if (response.status === 200) {
         // 상태 업데이트
         console.log(response);
-        setTodolist((prevTodolist) =>
+        setTodo((prevTodolist) =>
           prevTodolist.map((item) =>
             item.todolistId === todolistId ? { ...item, status: newStatus } : item
           )
@@ -48,19 +51,27 @@ function TodolistMain() {
       // 유저 아이디를 받을때 재작성
       const response = await api.get('/todolist');
       console.log(response.data);
-      setTodolist(response.data);
+      setTodo(response.data);
     }catch(error){
       console.log(error)
     }
   }
 
   const handleRegisterInputChange = (e) => {
+
     const {name , value} = e.target
     console.log(value);
     setTodo(todo => ({
           ...todo,
           [name]: value
     }))
+
+    setTodo(todoList => {
+      return {
+          ...todoList,
+          [e.target.name]: e.target.value
+        }
+    })
   }
 
 
@@ -81,6 +92,20 @@ function TodolistMain() {
       console.error(error);
       alert("등록실패!");
     }
+
+
+    setTodo(todoList => {
+      return{
+        todoTxt: "",
+        todoDate: ""
+      }
+    });
+
+    // const handlelogoutClick = () => {
+    //   alert("할 일 다하셨나요?");
+    //   logout("/home");
+    // };
+
   }
 
   
