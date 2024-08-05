@@ -211,3 +211,13 @@ height: 410px;
 .checkbox li{
   list-style-type: none;
 }
+
+.todo-item.complete {
+  background-color: #d4edda; 
+  color: #155724; 
+}
+
+.todo-item.incomplete {
+  background-color: #f8d7da; 
+  color: #721c24; 
+}
