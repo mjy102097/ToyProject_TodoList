@@ -43,7 +43,7 @@ const CalendarModal = () => {
         return (
           <ul>
             {filteredItems.map((item, index) => (
-              <li key={index}>
+              <li key={index} className={`todo-item ${item.complete ? 'complete' : 'incomplete'}`}>
                 <p>{item.date}</p>
                 <p>{item.content}</p>
                 <button onClick={() => handleStatusClick(item.todoId, item.complete)}>✔</button>
@@ -271,7 +271,9 @@ const CalendarModal = () => {
         <div className="list-container">
           <ul>
             {filteredItems2.map((item, index) => (
-              <li key={index} >{item.content}</li>
+              <li key={index} className={`todo-item ${item.complete ? 'complete' : 'incomplete'}`}>
+                {item.content}
+              </li>
             ))}
           </ul>
         </div>

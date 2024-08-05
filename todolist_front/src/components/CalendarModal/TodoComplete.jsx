@@ -6,7 +6,7 @@ function TodoComplete({todolist}) {
         <div className='todo-list-content'>
           <ul>
             {filteredItems.map((item, index) => (
-              <li key={index}>
+              <li key={index} className='todo-item complete'>
                 <p>{item.date}</p>
                 <p>{item.content}</p> 
                 <button>✔</button>

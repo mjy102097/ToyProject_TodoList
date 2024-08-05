@@ -67,7 +67,6 @@ function Login(props) {
     };
 
     return (
-    <body>
         <div css={loginpage}>
             <div className='usercss'>
                 <h2>로그인</h2>
@@ -90,7 +89,6 @@ function Login(props) {
                 </div>
             </div>
         </div>
-    </body>
     );
 }
 export default Login;
