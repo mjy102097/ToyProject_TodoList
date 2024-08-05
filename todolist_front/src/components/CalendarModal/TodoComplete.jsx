@@ -8,10 +8,7 @@ function TodoComplete({todolist}) {
             {filteredItems.map((item, index) => (
               <li key={index} className='todo-item complete'>
                 <p>{item.date}</p>
-                <p>{item.content}</p> 
-                <button>✔</button>
-                <button>🖍</button>
-                <button>✂</button>
+                <p>{item.content}</p>
               </li>
             ))}
           </ul>
