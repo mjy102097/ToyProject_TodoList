@@ -1,24 +1,41 @@
 import { css } from "@emotion/react";
 
 export const newUser = css`
-  height: 100%;
-  width: 100%;
+
+.usercss {
+margin: 300px auto;
+background-color: #333;
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+color: #fff;
+text-align: center;
+width: 300px;
+}
+
+.user-input {
+display: block;
+width: 90%;
+padding: 10px;
+margin: 10px 0;
+border-radius: 5px;
+border: 1px solid #ccc;
+}
+
+.click-box {
+padding: 10px 20px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+background-color: #222425;
+color: #fff;
+font-size: 12px;
+margin: 5px;
+}
+
+.name-input {
   display: flex;
-  justify-content: center;
   align-items: center;
-
-  .newuser {
-    border: 1px solid #dbdbdb;
-    height: 600px;
-    width: 800px;
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-
-  
-
-
+  justify-self: center;
+}
 `

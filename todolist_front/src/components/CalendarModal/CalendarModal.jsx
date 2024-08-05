@@ -3,7 +3,7 @@ import Calendar from 'react-calendar';
 import Modal from 'react-modal';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
-import './style.css'; // 추가한 CSS 파일을 import 합니다
+import './style.css';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import api from '../../apis/instance';
@@ -24,30 +24,22 @@ const CalendarModal = () => {
   useEffect(() => {
     requestTodoList(date);
   }, [date]);
+
   const [activeComponent, setActiveComponent] = useState();
   const [currentMonth, setCurrentMonth] = useState(format(new Date(), 'yyyy-MM', { locale: ko }));
 
   useEffect(() => {
-    // 초기 렌더링 시 현재 월의 투두 리스트를 가져옵니다
-    setDate(new Date(date.getFullYear(), date.getMonth(), 1)); // 첫날로 변경
+    setDate(new Date(date.getFullYear(), date.getMonth(), 1));
     requestTodoList(currentMonth);
   }, []);
 
-  useEffect(() => {
-    requestTodoList(currentMonth);
-  }, [currentMonth]);
-
-
   const renderComponent = () => {
-
     switch (activeComponent) {
       case 1:
-        return <TodoComplete todolist={todolist} />;
+        return <TodoComplete todolist={filteredItems} />;
       case 2:
-        return <TodoInComplete todolist={todolist} />;
+        return <TodoInComplete todolist={filteredItems} />;
       default:
-        <CalendarModal />
-
         return (
           <ul>
             {filteredItems.map((item, index) => (
@@ -63,6 +55,7 @@ const CalendarModal = () => {
         );
     }
   }
+
   const handleDateChange = (newDate) => {
     setDate(newDate);
   };
@@ -75,8 +68,6 @@ const CalendarModal = () => {
     }
   };
 
-
-
   const handleInputChange = (e) => {
     setRegistertodo({
       ...registertodo,
@@ -84,7 +75,6 @@ const CalendarModal = () => {
       date: format(date, 'yyyy년 M월 d일', { locale: ko }),
     });
   };
-
 
   const handleRegisterSubmitClick = async () => {
     try {
@@ -113,8 +103,6 @@ const CalendarModal = () => {
     try {
       const response = await axios.get(`http://localhost:8080/api/v1/todolist`, { registertodo });
       setTodolist(response.data);
-      console.log(todolist);
-
     } catch (e) {
       console.error(e);
     }
@@ -126,18 +114,15 @@ const CalendarModal = () => {
       complete: todoComplete === 0 ? 1: 0
     }
     try {
-      console.log("complete", todoId);
       requestTodoList();
       const response = await axios.put(`http://localhost:8080/api/v1/todocomplete/${todoId}`, dto);
       requestTodoList(response.data);
-      console.log("리스트:", todolist);
     } catch (error) {
       console.error(error)
     }
   }
 
   const handleUpdateClick = async (todoId) => {
-    console.log(todoId);
     let responseData = null;
     try {
       const response = await axios.put(`http://localhost:8080/api/v1/gettodo/${todoId}`);
@@ -156,10 +141,10 @@ const CalendarModal = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "삭제"
+      confirmButtonText: "삭제",
+      cancelButtonText: "취소",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        console.log(id);
         await requestDeleteTodo(id);
         await requestTodoList(date);
         Swal.fire("삭제완료", "Todo가 삭제되었습니다", "success");
@@ -168,38 +153,30 @@ const CalendarModal = () => {
   };
 
   const handleEditTodoClick = async (todoId) => {
+    const data = await handleUpdateClick(todoId);
     Swal.fire({
-      title: "Submit your Github username",
+      title: "내용수정",
       input: "text",
+      inputValue: data.content,
+      showDenyButton: true,
+      confirmButtonText: "저장",
+      denyButtonText: `취소`,
       inputAttributes: {
+        text: data.content,
         autocapitalize: "off"
       },
-    }).then({
-      title: "수정하시겠습니까?",
-      showDenyButton: true,
-      showCancelButton: true,
-      confirmButtonText: "Save",
-      denyButtonText: `Don't save`
     }).then(async (result) => {
       if (result.isConfirmed) {
         const edit = result.value;
-        console.log(edit);
-        console.log(result);
-
-        const data = await handleUpdateClick(todoId);
-        console.log(data);
         data.content = edit;
         const response = await api.put(`todoedit/${todoId}`, data);
         await requestTodoList(date);
-        console.log(response.data)
-        Swal.fire("Saved!", "", "success");
+        Swal.fire("수정 완료");
       } else if (result.isDenied) {
-        Swal.fire("Changes are not saved", "", "info");
+        Swal.fire("수정 취소");
       }
     });
   };
-
-
 
   const isMarked = (date) => {
     return todolist.some(todo => todo.date === format(date, 'yyyy년 M월 d일', { locale: ko }));
@@ -215,13 +192,20 @@ const CalendarModal = () => {
     }
     return null;
   };
-  const filteredItems = todolist.filter(todo => {
-    const todoDate = new Date(todo.date.replace(/년|월|일/g, '').trim());
-    return (
-      todoDate.getFullYear() === date.getFullYear() &&
-      todoDate.getMonth() === date.getMonth()
-    );
-  });
+
+  const filteredItems = todolist
+    .filter(todo => {
+      const todoDate = new Date(todo.date.replace(/년|월|일/g, '').trim());
+      return (
+        todoDate.getFullYear() === date.getFullYear() &&
+        todoDate.getMonth() === date.getMonth()
+      );
+    })
+    .sort((a, b) => {
+      const dateA = new Date(a.date.replace(/년|월|일/g, '').trim());
+      const dateB = new Date(b.date.replace(/년|월|일/g, '').trim());
+      return dateA - dateB;
+    });
 
   const filteredItems2 = todolist.filter(todo => todo.date === format(date, 'yyyy년 M월 d일', { locale: ko }));
 
@@ -233,7 +217,6 @@ const CalendarModal = () => {
           onChange={handleDateChange}
           prev2Label={null}
           next2Label={null}
-
           showNeighboringMonth={false}
           tileContent={tileContent}
           onClickDay={() => setIsModalOpen(true)}
@@ -245,8 +228,7 @@ const CalendarModal = () => {
         <div className="todo-list-container">
           <h2>{format(date, 'yyyy년 M월', { locale: ko })}의 투두 리스트</h2>
         </div>
-
-        <div className='todo-list-content'>
+        <div className='checkbox'>
           <ul>
             <li>
               <button onClick={() => setActiveComponent(0)}>전체</button>
@@ -254,9 +236,9 @@ const CalendarModal = () => {
               <button onClick={() => setActiveComponent(2)}>미완료</button>
             </li>
           </ul>
-          <div>
-            {renderComponent()}
-          </div>
+        </div>
+        <div className='todo-list-content'>
+          {renderComponent()}
         </div>
       </div>
       <Modal
@@ -289,7 +271,7 @@ const CalendarModal = () => {
         <div className="list-container">
           <ul>
             {filteredItems2.map((item, index) => (
-              <li key={index}>{item.content}</li>
+              <li key={index} >{item.content}</li>
             ))}
           </ul>
         </div>

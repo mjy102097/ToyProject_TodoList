@@ -28,10 +28,8 @@ function Login(props) {
                     break;
                 case "password" :
                     username.current.focus();
-                    setUser(user => [ ...user, inputData ]);
-                    setInputData({ ...user });
+                    handleUserLoginClick();
                     break;
-                default:
             }
         }
     } 
@@ -44,12 +42,17 @@ function Login(props) {
         });
     }
     const handleUserLoginClick = async () => {
+        if(user.username.includes() === "" || user.password.includes() === ""){
+            alert("아이디와 비밀번호 모두 입력해 주세요.");
+            return;
+        }
+        
         try{
             const response = await api.post('/userlogin', user);
             setUser(response.data);
             console.log(response.data);
             alert(user.username + "님 환영합니다!");
-            todogate("/TodoMain");
+            todogate("/CalendarModal");
         }catch(e) {
             console.error(e);
             alert("아이디 비밀번호를 확인하세요");
@@ -66,23 +69,23 @@ function Login(props) {
     return (
     <body>
         <div css={loginpage}>
-            <div className='logincss'>
-                <h2>Login</h2>
-                <div type='text' className="todo-mainContainer">
-                    <input className='login-input' name="username" placeholder="아이디" 
+            <div className='usercss'>
+                <h2>로그인</h2>
+                <div>
+                    <input className='user-input' name="username" placeholder="아이디" 
                     onKeyDown={handleInputKeyDown}
                     onChange={handleInputChange}
                     value={user.username}
                     ref={inputRef.username}/>
 
-                    <input className='login-input' type='password' name="password" placeholder="비밀번호" 
+                    <input className='user-input' type='password' name="password" placeholder="비밀번호" 
                     onKeyDown={handleInputKeyDown}
                     onChange={handleInputChange}
                     value={user.password}
                     ref={inputRef.password}/>
                 <div>
-                    <button className='click-button' onClick={handleUserLoginClick}>로그인</button>
-                    <button className='click-button' onClick={handleNewUsersClick}>회원가입</button>
+                    <button className='click-box' onClick={handleUserLoginClick}>로그인</button>
+                    <button className='click-box' onClick={handleNewUsersClick}>회원가입</button>
                 </div>
                 </div>
             </div>

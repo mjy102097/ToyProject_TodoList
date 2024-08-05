@@ -17,7 +17,6 @@ function TodoInComplete({todolist}) {
                 <button >✂</button>
               </li>
             ))}
-            미완료
           </ul>
         </div>
     );

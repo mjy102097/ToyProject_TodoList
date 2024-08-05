@@ -2,8 +2,8 @@ import { css } from "@emotion/react";
 
 export const loginpage = css`
 
-.logincss {
-margin: 0 auto;
+.usercss {
+margin: 300px auto;
 background-color: #333;
 padding: 20px;
 border-radius: 10px;
@@ -13,7 +13,7 @@ text-align: center;
 width: 300px;
 }
 
-.login-input {
+.user-input {
 display: block;
 width: 93%;
 padding: 10px;
@@ -22,12 +22,12 @@ border-radius: 5px;
 border: 1px solid #ccc;
 }
 
-.click-button {
+.click-box {
 padding: 10px 20px;
 border: none;
 border-radius: 5px;
 cursor: pointer;
-background-color: #007BFF;
+background-color: #222425;
 color: #fff;
 font-size: 16px;
 margin: 5px;
