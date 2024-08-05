@@ -10,9 +10,6 @@ function TodoInComplete({todolist}) {
               <li key={index} className='todo-item incomplete'>
                 <p>{item.date}</p>
                 <p>{item.content}</p> 
-                <button >✔</button>
-                <button >🖍</button>
-                <button >✂</button>
               </li>
             ))}
           </ul>
