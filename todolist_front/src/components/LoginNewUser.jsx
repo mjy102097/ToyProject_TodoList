@@ -77,18 +77,16 @@ function LoginNewUser(props) {
 
   return (
     <div css={s.newUser}>
-      <div  className='newuser' >
+      <div  className='usercss' >
         <h2>회원가입</h2>
-          <div>
-            <label>Username:</label>
-            <input type="text" name="username" value={user.username} onChange={handleIdChange} />
-            <button onClick={handleuserClick}>중복확인</button>
+          <div className='name-input'>
+            <input type="text" name="username" className='user-input' placeholder="아이디" value={user.username} onChange={handleIdChange} />
+            <button className='click-box' onClick={handleuserClick}>중복확인</button>
           </div>
           <div>
-            <label>Password:</label>
-            <input type="password" name="password" value={user.password} onChange={handlePasswordChange} />
+            <input type="password" name="password" className='user-input' placeholder="비밀번호" value={user.password} onChange={handlePasswordChange} />
           </div>
-            <button onClick={handleJoinClick}>가입하기</button>
+            <button className='click-box' onClick={handleJoinClick}>가입하기</button>
       </div>
     </div>
   );
